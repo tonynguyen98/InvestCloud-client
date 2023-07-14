@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
-interface Applet {
+export interface Applet {
   name: string;
   categories: string[];
 }
 
-const lib: {
+export const lib: {
   categories: string[];
   applets: { name: string; categories: string[] }[];
 } = {
@@ -122,6 +122,7 @@ export class LibraryComponent {
   resetValues(): void {
     this.selectedCategory = '';
     this.searchQuery = '';
+    this.currentAppletPage = 1;
   }
 
   goToPreviousAppletPage(): void {

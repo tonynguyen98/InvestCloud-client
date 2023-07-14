@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LibraryComponent } from './library.component';
+import { Applet, LibraryComponent, lib } from './library.component';
 import { FormsModule } from '@angular/forms';
 
 describe('LibraryComponent', () => {
@@ -40,7 +40,12 @@ describe('LibraryComponent', () => {
   it('should return the correct count of applets for a category', () => {
     const category = 'Performance';
     const count = component.getCategoryCount(category);
-    const filteredApplets = component.filteredApplets.filter((applet) =>
+
+    const applets: Applet[] = !component.searchQuery
+      ? lib.applets
+      : component.filteredApplets;
+
+    const filteredApplets = applets.filter((applet) =>
       applet.categories.includes(category)
     );
     expect(count).toEqual(filteredApplets.length);

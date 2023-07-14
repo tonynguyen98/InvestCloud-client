@@ -8,10 +8,10 @@
         <button class="btn btn-link" (click)="resetValues()">Reset</button>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 20px;">
       <input type="text" class="form-control" placeholder="Search Applets" [(ngModel)]="searchQuery" />
     </div>
-    <div class="scrollable-container" style="max-height: 665px; overflow-y: auto;">
+    <div style="max-height: 665px; overflow-y: auto;">
       <div class="card border-0 mb-3 p-3" *ngFor="let category of filteredCategories" (click)="selectCategory(category)"
         [ngClass]="{ 'bg-primary': category === selectedCategory }">
         <div class="row align-items-center">
