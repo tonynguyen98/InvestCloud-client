@@ -59,10 +59,6 @@ export class LibraryComponent {
   selectedCategory: string = '';
   searchQuery: string = '';
 
-  // Pagination properties
-  currentAppletPage: number = 1;
-  appletItemsPerPage: number = 10;
-
   get filteredApplets(): Applet[] {
     let applets = lib.applets;
 
