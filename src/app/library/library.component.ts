@@ -59,6 +59,10 @@ export class LibraryComponent {
   selectedCategory: string = '';
   searchQuery: string = '';
 
+  // pagination details
+  currentAppletPage: number = 1;
+  totalApplets: number = 0;
+
   get filteredApplets(): Applet[] {
     let applets = lib.applets;
 
@@ -72,7 +76,14 @@ export class LibraryComponent {
       );
     }
 
-    return applets.sort();
+    this.totalApplets = applets.length;
+
+    const pageSize = 10;
+    const startIndex = (this.currentAppletPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    const paginatedApplets = applets.slice(startIndex, endIndex);
+    return paginatedApplets.sort();
   }
 
   get filteredCategories(): string[] {
@@ -111,5 +122,18 @@ export class LibraryComponent {
   resetValues(): void {
     this.selectedCategory = '';
     this.searchQuery = '';
+  }
+
+  goToPreviousAppletPage(): void {
+    if (this.currentAppletPage > 1) {
+      this.currentAppletPage--;
+    }
+  }
+
+  goToNextAppletPage(): void {
+    const totalPages = Math.ceil(this.totalApplets / 10);
+    if (this.currentAppletPage < totalPages) {
+      this.currentAppletPage++;
+    }
   }
 }
