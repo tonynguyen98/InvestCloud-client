@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-4">
+    <!-- Categories section -->
     <div class="row justify-content-between">
       <div class="col-sm-5">
         <h3>Categories</h3>
@@ -8,15 +9,18 @@
         <button class="btn btn-link" (click)="resetValues()">Reset</button>
       </div>
     </div>
+    <!-- Display Search -->
     <div class="form-group" style="margin-bottom: 20px;">
       <input type="text" class="form-control" placeholder="Search Applets" [(ngModel)]="searchQuery" />
     </div>
     <div style="max-height: 665px; overflow-y: auto;">
+      <!-- Display categories -->
       <div class="card border-0 mb-3 p-3" *ngFor="let category of filteredCategories" (click)="selectCategory(category)"
         [ngClass]="{ 'bg-primary': category === selectedCategory }">
         <div class="row align-items-center">
           <div class="col text-primary" [ngClass]="{ 'text-white': category === selectedCategory }">
             {{ category }}
+            <!-- Display category count -->
             <span class="badge text-bg-secondary rounded-pill" [ngClass]="{
               'bg-white text-primary': category === selectedCategory
             }">{{ getCategoryCount(category) }}</span>
@@ -27,16 +31,21 @@
   </div>
   <div class="col-8">
     <h3>Applets</h3>
+    <!-- Display applets -->
     <div class="card text-bg-light mb-3 p-3" *ngFor="let applet of filteredApplets">
       {{ applet.name }}
     </div>
+    <!-- Pagination -->
     <ul class="pagination justify-content-center">
+      <!-- Previous page button -->
       <li class="page-item" (click)="goToPreviousAppletPage()" [class.disabled]="currentAppletPage === 1">
         <a class="page-link">Previous</a>
       </li>
+      <!-- Current page input -->
       <li class="page-item">
         <input class="form-control" style="width: 50px" type="number" [(ngModel)]="currentAppletPage">
       </li>
+      <!-- Next page button -->
       <li class="page-item" class="page-item" (click)="goToNextAppletPage()"
         [class.disabled]="currentAppletPage === totalApplets">
         <a class="page-link">Next</a>

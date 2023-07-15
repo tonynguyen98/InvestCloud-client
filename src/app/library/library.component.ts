@@ -59,13 +59,15 @@ export class LibraryComponent {
   selectedCategory: string = '';
   searchQuery: string = '';
 
-  // pagination details
+  // Pagination details
   currentAppletPage: number = 1;
   totalApplets: number = 0;
 
   get filteredApplets(): Applet[] {
     let applets = lib.applets;
 
+    // Apply filtering based on search query or selected category
+    // Search has precedence, should remove categories when not found in
     if (this.searchQuery) {
       applets = applets.filter((applet) =>
         applet.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -89,11 +91,11 @@ export class LibraryComponent {
   get filteredCategories(): string[] {
     const categories: Set<string> = new Set<string>();
 
-    // if no search query is provided, include all categories from the library
+    // If no search query is provided, include all categories from the library
     if (!this.searchQuery) {
       lib.categories.forEach((category) => categories.add(category));
     } else {
-      // if search query is provided, include only categories of matching applets
+      // If search query is provided, include only categories of matching applets
       this.filteredApplets.forEach((applet) => {
         applet.categories.forEach((category) => categories.add(category));
       });
